@@ -16,9 +16,8 @@ init() {
 
     this.connection = new Sequelize(ConfigDatabase)
     models.map((model) => model.init(this.connection))
-}
+}                                                                                                                                                                                                                       
 
 }
-
 
 export default new Database()
