@@ -1,21 +1,30 @@
-import * as Yup from 'yup'
+import User from "../models/User"
+import * as Yup from "yup";
 
 class SessionController {
-
-async store(request,response) {
-
+  async store(request, response) {
     const schema = Yup.object().shape({
-    
-        password: Yup.string().required(),
-        email: Yup.string().email().required(),
-
+      password: Yup.string().required().min(6),
+      email: Yup.string().email().required(),
     });
 
-    if(!(await schema.isValid(request.body)))
-    return response.status(400).json({error: 'err.errors' })
+    const isValid = (await schema.isValid(request.body))
 
+    if (!isValid) {
+     return response
+    .status(400)
+    .json({ error: "err.errors" });
+  }
+  
+const { email, password } = request.body;
+
+const userExist = await User.findOne({
+  where: { email,password },
+});
+
+if (!userExist) {
+  return response.status(400).json({ error: "usuario existente" });
 }
-
 }
-
-    export default new SessionController ()
+}
+export default new SessionController();
