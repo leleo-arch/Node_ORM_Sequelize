@@ -1,5 +1,6 @@
 import Sequelize, {Model} from "sequelize"
 import bcrypt from 'bcrypt'
+import { password } from "../../config/database"
 
 
 
@@ -23,12 +24,17 @@ class User extends Model {
 
        this.addHook('beforeSave', async (user) => {
         if (user.password) {
-            user.password_hash = await bcrypt.hash(user.password, 10)
+            user.password_hash = await bcrypt.hash(user.password, 30)
         }
 
        })
         return this 
     }
+
+comparePassaworld () {
+    bcrypt.compare(password, this.password_hash)
+
+}
 }
 
 export default User
