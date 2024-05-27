@@ -1,16 +1,14 @@
 import Sequelize, {Model} from "sequelize"
 
-class User extends Model {
-    static init(sequelize){
+class Products extends Model {
+     static init(sequelize){
         super.init (
             {
          
              name: Sequelize.STRING,
-             email: Sequelize.STRING,
-             password: Sequelize.VIRTUAL,
-             password_hash: Sequelize.STRING,
-             admin: Sequelize.BOOLEAN, 
-            
+             price: Sequelize.STRING,
+             path: Sequelize.STRING,
+             category: Sequelize.STRING,            
             },
               
             {
@@ -19,10 +17,6 @@ class User extends Model {
        )
     }
 
-comparePassaworld () {
-    
-
-}
 }
 
-export default User
+export default Products;
