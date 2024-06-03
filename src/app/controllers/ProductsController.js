@@ -1,8 +1,9 @@
 import * as Yup from "yup";
+import Products from "../models/User";
 
 class SessionProductController {
   async store(request, response) {
-    const schema = Yup.object({
+    const schema = Yup.object().shape({
       name: Yup.string().required(),
       price: Yup.number().required(),
       category: Yup.string().required(),
@@ -15,8 +16,15 @@ try{
         return response.status(400).json({error: err.errors })
     }
 
- 
-    return response.status(201).json({ok:true})
+ const { filename: path} = request.file 
+const {name,price,category} = request.body
+const product = Products.create({
+  name,
+  price,
+  category,
+  path,
+})
+    return response.status(201).json({product})
 }
 
 }
