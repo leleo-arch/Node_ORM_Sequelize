@@ -1,13 +1,11 @@
 'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
 
   await queryInterface.createTable('products', { 
     id: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
@@ -16,7 +14,7 @@ module.exports = {
     allowNull: false,
   },
  price: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: false,
     
   },
@@ -25,8 +23,7 @@ module.exports = {
     allowNull: false,
   },
   path: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   created_at: {
@@ -41,7 +38,7 @@ module.exports = {
   
   },
 
-  async down (queryInterface, Sequelize) {
+  async down (queryInterface) {
 
     await queryInterface.dropTable('products');
 
