@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import Products from "../models/Products";
 
 class SessionProductController {
   async store(request, response) {
@@ -15,10 +16,17 @@ try{
         return response.status(400).json({error: err.errors })
     }
 
-const file = request.file
-console.log(file)
+const {filename: path} = request.file;
+const {name, price, category} = request.body
 
-    return response.status(201).json({message: true})
+const product = Products.create({
+  name,
+  price,
+  category,
+  path,
+});
+
+    return response.status(201).json(product)
 }
 
 }

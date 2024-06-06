@@ -5,8 +5,9 @@ import ProductsController from "./app/controllers/ProductsController";
 import multer from "multer";
 import multerConfig from "./config/multer"
 
-const upload = multer(multerConfig);
 const routes = new Router();
+
+const upload = multer(multerConfig);
 
 
 routes.post('/user', Usercontrollers.store)
