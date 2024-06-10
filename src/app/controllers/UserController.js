@@ -26,7 +26,7 @@ const {name, email, password, admin } = request.body
  
 const userExist = await User.findOne({
 
-    where: {email}
+    where: {email},
 
 })
 

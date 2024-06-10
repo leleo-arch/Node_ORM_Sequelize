@@ -1,6 +1,5 @@
 import Sequelize, {Model} from "sequelize"
 import bcrypt from 'bcrypt'
-import { password } from "../../config/database"
 
 
 class User extends Model {
@@ -30,8 +29,8 @@ class User extends Model {
         return this 
     }
 
-comparePassaworld () {
-    bcrypt.compare(password, this.password_hash)
+CheckPassword (password) {
+    return bcrypt.compare(password, this.password_hash)
 
 }
 }
