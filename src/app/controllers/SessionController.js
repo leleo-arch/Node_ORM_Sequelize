@@ -1,6 +1,7 @@
 import User from "../models/User";
 import * as Yup from "yup";
 import jwt from 'jsonwebtoken';
+import autocoConfig from "../../config/auth"
 
 class SessionController {
   async store(request, response) {
@@ -10,7 +11,7 @@ class SessionController {
     });
 
     const emailInPasswordIncorrect = () => {
-      return response.status(400).json({ error: "Senha ou E-mail incorretos" });
+      return response.status(401).json({ error: "Senha ou E-mail incorretos" });
     };
 
     if (!(await schema.isValid(request.body))) {
@@ -37,9 +38,8 @@ class SessionController {
       email,
       admin: user.admin,
       token: jwt.sign(
-        { id: user.id },
-        "bebd3d1d989b0ea12ae28f593463d8c0",
-        { expiresIn: '3d' }
+        { id: user.id }, autocoConfig.secret,{
+        expiresIn: autocoConfig.expiresIn}
       ),
     });
   }

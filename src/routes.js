@@ -4,18 +4,14 @@ import SessionController from "./app/controllers/SessionController";
 import ProductsController from "./app/controllers/ProductsController";
 import multer from "multer";
 import multerConfig from "./config/multer"
-
-const routes = new Router();
+import authMiddleware from "./app/middlewares/authh"
 
 const upload = multer(multerConfig);
-
+const routes = new Router();
 
 routes.post('/user', Usercontrollers.store)
 routes.post('/session', SessionController.store)
+routes.use(authMiddleware)
 routes.post('/products', upload.single('file'), ProductsController.store)
 
-
-
-export default routes;
-
-
+export default routes
