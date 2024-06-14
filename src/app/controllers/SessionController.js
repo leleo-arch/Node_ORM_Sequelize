@@ -1,7 +1,7 @@
 import User from "../models/User";
 import * as Yup from "yup";
 import jwt from 'jsonwebtoken';
-import autocoConfig from "../../config/auth"
+import authConfig from "../../config/auth";
 
 class SessionController {
   async store(request, response) {
@@ -15,22 +15,31 @@ class SessionController {
     };
 
     if (!(await schema.isValid(request.body))) {
+      console.log('Validation failed');
       return emailInPasswordIncorrect();
     }
 
     const { email, password } = request.body;
+
+    console.log('Request body:', request.body);
 
     const user = await User.findOne({
       where: { email },
     });
 
     if (!user) {
+      console.log('User not found');
       return emailInPasswordIncorrect();
     }
 
-    if (!(await user.CheckPassword(password))) {  // Ensure method name is correct
-      return emailInPasswordIncorrect()
-    };
+    console.log('User found:', user);
+
+    if (!(await user.checkPassword(password))) {
+      console.log('Password incorrect');
+      return emailInPasswordIncorrect();
+    }
+
+    console.log('Password correct');
 
     return response.status(201).json({
       id: user.id,
@@ -38,8 +47,11 @@ class SessionController {
       email,
       admin: user.admin,
       token: jwt.sign(
-        { id: user.id }, autocoConfig.secret,{
-        expiresIn: autocoConfig.expiresIn}
+        { id: user.id },
+        authConfig.secret,
+        {
+          expiresIn: authConfig.expiresIn,
+        }
       ),
     });
   }

@@ -1,4 +1,3 @@
-
 import jwt from 'jsonwebtoken'
 import authConfig from '../../config/auth'
 
@@ -26,4 +25,4 @@ return response.status(401).json({ERROR: "Token is Invalid"})
 
 }
 
-}                                                                                                                                   1                                                                                                           
+}                                                                                                                                                                                                                                            

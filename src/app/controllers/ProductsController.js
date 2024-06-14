@@ -29,6 +29,13 @@ const product = Products.create({
     return response.status(201).json(product)
 }
 
+async index(request, response) {
+  const products = await Products.findAll()
+  console.log(request)
+  return response.status(201).json(products)
+
+}
+
 }
 export default new SessionProductController ();
 
