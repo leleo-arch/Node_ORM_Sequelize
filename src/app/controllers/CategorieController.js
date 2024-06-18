@@ -16,17 +16,29 @@ try{
 
 const {name} = request.body
 
-const product = Category.create({
+const categoryExist = await Category.findOne({
+
+  where: {name},
+
+})
+
+if(categoryExist)
+{
+  return response.status(400).json({error: 'Category já existente'})
+
+}
+
+const categories = Category.create({
   name,
 });
 
-    return response.status(201).json(product)
+    return response.status(201).json(categories )
 }
 
 async index(request, response) {
-  const products = await Category.findAll()
+  const categories  = await Category.findAll()
   console.log(request)
-  return response.status(201).json(products)
+  return response.status(201).json(categories )
 
 }
 
