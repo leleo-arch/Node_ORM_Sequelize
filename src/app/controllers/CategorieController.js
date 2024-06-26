@@ -38,7 +38,7 @@ const categories = Category.create({
 async index(request, response) {
   const categories  = await Category.findAll()
   console.log(request)
-  return response.status(201).json(categories )
+  return response.status(201).json(categories)
 
 }
 
