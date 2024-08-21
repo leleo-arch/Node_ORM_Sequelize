@@ -50,7 +50,7 @@ class SessionController {
         { id: user.id },
         authConfig.secret,
         {
-          expiresIn:'500',
+          expiresIn:'10000000',
         }
       ),
 

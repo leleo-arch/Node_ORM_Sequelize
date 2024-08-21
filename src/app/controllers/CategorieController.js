@@ -32,7 +32,7 @@ const categories = Category.create({
   name,
 });
 
-    return response.status(201).json(categories )
+    return response.status(201).json(categories)
 }
 
 async index(request, response) {

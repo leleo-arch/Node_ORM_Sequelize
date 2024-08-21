@@ -7,7 +7,7 @@ const authToken = request.headers.authorization
 if(!authToken) {
 return response.status(401).json({ERROR: "Cade seu token"})
 }
-const token = authToken.split('')[1]
+const token = authToken.split(' ')[1];
 
 try{
 jwt.verify(token, authConfig.secret, function(erro, decoded){
@@ -15,8 +15,10 @@ jwt.verify(token, authConfig.secret, function(erro, decoded){
     if(erro) {
        throw new Error()
     }
-console.log(decoded)
-return next()
+console.log(decoded);
+console.log(request.headers.authorization);
+
+return next();
 
 })
 
@@ -24,5 +26,7 @@ return next()
 return response.status(401).json({ERROR: "Token is Invalid"})
 
 }
+
+
 
 }                                                                                                                                                                                                                                            
