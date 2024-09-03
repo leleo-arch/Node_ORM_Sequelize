@@ -1,20 +1,18 @@
-import Sequelize, {Model} from "sequelize"
+import Sequelize, { Model } from "sequelize";
 
-class Categories extends Model {
-     static init(sequelize){
-        super.init (
-            {
-         
-             name: Sequelize.STRING,
-            
-            },
-              
-            {
-                sequelize,
-            }
-       )
-    }
+class Category extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        name: Sequelize.STRING,
+      },
+      {
+        sequelize,
+      }
+    );
 
+    return this;
+  }
 }
 
-export default Categories;
+export default Category;
