@@ -15,9 +15,12 @@ jwt.verify(token, authConfig.secret, function(erro, decoded){
     if(erro) {
        throw new Error()
     }
+    request.userid = decoded.id;
+    request.userName = decoded.name;
+
+
 console.log(decoded);
 console.log(request.headers.authorization);
-
 return next();
 
 })
