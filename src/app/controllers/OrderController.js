@@ -55,10 +55,12 @@ class OrderController {
         name: request.userName,
       },
       products: formattedProducts,
-      status: 'pending', // Pode ajustar conforme necessário
+      status: 'edido realizado', // Pode ajustar conforme necessário
     });
-
-    return response.status(201).json(order);
+     
+     const createOrder = await Order.create(order)
+      
+    return response.status(201).json(createOrder);
   }
 }
 
